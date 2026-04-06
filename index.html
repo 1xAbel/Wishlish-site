@@ -10,9 +10,7 @@
         body {
             font-family: 'Nunito', sans-serif;
             background-color: #18181b;
-            /* Deep cozy charcoal */
             color: #e4e4e7;
-            /* Soft light gray for reading */
             margin: 0;
             padding: 40px 20px;
         }
@@ -28,11 +26,9 @@
         .main-content {
             flex: 2;
             background: #27272a;
-            /* Slightly lighter gray for cards */
             padding: 30px;
             border-radius: 24px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            /* Deeper shadow for dark mode */
         }
 
         .sidebar {
@@ -62,7 +58,6 @@
             display: flex;
             align-items: center;
             background-color: #303036;
-            /* A soft lift from the card background */
             border: 1px solid #3f3f46;
             border-radius: 16px;
             padding: 20px;
@@ -81,7 +76,6 @@
             height: 24px;
             cursor: pointer;
             accent-color: #9db4a0;
-            /* Keeps the comfy sage green */
         }
 
         .item-details {
@@ -91,7 +85,6 @@
         .item-name {
             font-size: 1.15em;
             color: #9db4a0;
-            /* Sage green links */
             text-decoration: none;
             font-weight: 600;
             transition: color 0.2s;
@@ -105,7 +98,6 @@
             font-size: 1.25em;
             font-weight: 800;
             color: #d4a373;
-            /* Warm sand/tan for price */
             min-width: 80px;
             text-align: right;
         }
@@ -113,7 +105,6 @@
         .delete-btn {
             background-color: transparent;
             color: #e57373;
-            /* Soft red */
             border: none;
             padding: 8px 12px;
             border-radius: 8px;
@@ -135,7 +126,6 @@
             margin: 15px 0;
             text-align: center;
             background: #18181b;
-            /* Recessed look for the total */
             padding: 15px;
             border-radius: 16px;
         }
@@ -161,7 +151,6 @@
             font-size: 1em;
             color: #fafafa;
             background-color: #18181b;
-            /* Dark inputs */
             transition: border-color 0.2s;
         }
 
@@ -173,7 +162,6 @@
 
         .add-btn {
             background-color: #5d756c;
-            /* Deeper sage for the button */
             color: white;
             border: none;
             padding: 14px 20px;
@@ -241,18 +229,15 @@
     </div>
 
     <script>
-        // Check if there is already saved data in localStorage, otherwise start with an empty array
         let wishlistItems = JSON.parse(localStorage.getItem('myCozyWishlist')) || [];
 
-        // Function to save the current list to the browser's storage
         function saveList() {
             localStorage.setItem('myCozyWishlist', JSON.stringify(wishlistItems));
         }
 
-        // Function to render the list to the screen
         function renderWishlist() {
             const container = document.getElementById('wishlist-container');
-            container.innerHTML = ''; // Clear current list
+            container.innerHTML = '';
 
             if (wishlistItems.length === 0) {
                 container.innerHTML = '<div class="empty-state">Your wishlist is empty right now. Time to add some things!</div>';
@@ -262,7 +247,6 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'wishlist-item';
 
-                // Create the HTML for each item
                 itemDiv.innerHTML = `
                     <input type="checkbox" class="item-checkbox" ${item.checked ? 'checked' : ''} onchange="toggleCheck(${index})">
                     <div class="item-details">
@@ -278,19 +262,16 @@
             updateTotal();
         }
 
-        // Function to add a new item
         function addItem() {
             const nameInput = document.getElementById('newName').value;
             const priceInput = document.getElementById('newPrice').value;
             const linkInput = document.getElementById('newLink').value;
 
-            // Basic validation
             if (!nameInput || !priceInput || !linkInput) {
                 alert("Don't forget to fill out all the fields!");
                 return;
             }
 
-            // Add the new item
             wishlistItems.push({
                 name: nameInput,
                 price: parseFloat(priceInput),
@@ -298,7 +279,6 @@
                 checked: false
             });
 
-            // Save to localStorage
             saveList();
 
             document.getElementById('newName').value = '';
@@ -310,13 +290,13 @@
 
         function deleteItem(index) {
             wishlistItems.splice(index, 1);
-            saveList(); // Save changes
+            saveList(); 
             renderWishlist();
         }
 
         function toggleCheck(index) {
             wishlistItems[index].checked = !wishlistItems[index].checked;
-            saveList(); // Save the checked state
+            saveList(); 
             updateTotal();
         }
 
